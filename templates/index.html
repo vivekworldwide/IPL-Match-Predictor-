@@ -8,10 +8,56 @@
 </head>
 
 <body>
-    <h1>IPL Match Predictor 🏏</h1>
-    <form action="/predict" method="post">
+    <Div classz="container">
+        <h1>IPL Match Predictor 🏏</h1>
+        <p>Enter the match details to predict the winner</p>
+        <form action="/predict" method="post">
+            <div>
+                <label for="team1">Team 1</label>
+                <select name="team1" id="team1" required>
+                    <option value="">Select Team</option>
+                    {% for teams in teams %}
+                    <option value="{{teams}}">{{teams}}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div>
+                <label for="team2">Team 2</label>
+                <select name="team2" id="team2" required>
+                    <option value="">Select Team</option>
+                    {% for teams in teams %}
+                    <option value="{{teams}}">{{teams}}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div>
+                <label for="venue">Venue</label>
+                <select name="venue" id="venue" required>
+                    <option value="">Select Venue</option>
+                    {% for venue in venues %}
+                    <option value="{{venue}}">{{venue}}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div>
+                <label for="toss_winner">Toss Winner</label>
+                <select name="toss_winner" id="toss_winner" required>
+                    <option value="">Select Team</option>
+                    {% for teams in teams %}
+                    <option value="{{teams}}">{{teams}}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div>
+                <label for="toss_decision">Toss Decision</label>
+                <select name="toss_decision" id="toss_decision" required>
+                    <option value="">Select Decision</option>
+                    {% for toss_decision in toss_decision %}
+                    <option value="{{toss_decision}}">{{toss_decision}}</option>
+                    {% endfor %}
+                </select>
+            </div>
 
+        </form>
+    </Div>
     </form>
-</body>
-
-</html>

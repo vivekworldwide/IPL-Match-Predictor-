@@ -16,7 +16,7 @@ def home():
     venues = list(encoder_venue.classes_)
     return render_template('index.html', teams = teams, venues = venues)
 
-@app.route('/predict', methods = ['POST'])
+@app.route('/predict', methods=['POST'])
 def predict():
 
     team1 = request.form['team1']
@@ -49,9 +49,3 @@ def predict():
 
 if __name__ == '__main__':
     app.run(debug = True)
-
-
-
-    
-
-
