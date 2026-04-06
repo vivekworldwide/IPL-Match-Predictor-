@@ -14,7 +14,8 @@ encoder_toss = joblib.load('encoder_toss.pkl')
 def home():
     teams = list(encoder_team.classes_)
     venues = list(encoder_venue.classes_)
-    return render_template('index.html', teams = teams, venues = venues)
+    toss_decisions = list(encoder_toss.classes_)
+    return render_template('index.html', teams=teams, venues=venues, toss_decisions=toss_decisions)
 
 @app.route('/predict', methods=['POST'])
 def predict():
@@ -41,11 +42,12 @@ def predict():
 
     win_prob = round(max(probablities) *100, 2)
     
-    return jsonify({
-        'winner' : winner,
-        'win_prob' : win_prob
+    teams = list(encoder_team.classes_)
+    venues = list(encoder_venue.classes_)
+    toss_decisions = list(encoder_toss.classes_)
 
-    })
+    return render_template('index.html', teams=teams, venues=venues, toss_decisions=toss_decisions,
+                           winner=winner, win_prob=win_prob)
 
 if __name__ == '__main__':
     app.run(debug = True)
