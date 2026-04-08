@@ -36,11 +36,20 @@ def predict():
     #feature vector 
     features = np.array([[team1_encoded, team2_encoded, venue_encoded, toss_winner_encoded, toss_decision_encoded]])
     prediction = model.predict(features)[0]
-    probablities = model.predict_proba(features)[0]
+    probabilities = model.predict_proba(features)[0]
 
-    winner = encoder_team.inverse_transform([prediction])[0]
+    # Only compare team1 vs team2
+    team1_index = list(model.classes_).index(team1_encoded)
+    team2_index = list(model.classes_).index(team2_encoded)
+    team1_prob = probabilities[team1_index]
+    team2_prob = probabilities[team2_index]
 
-    win_prob = round(max(probablities) *100, 2)
+    if team1_prob >= team2_prob:
+        winner = team1
+        win_prob = round(team1_prob / (team1_prob + team2_prob) * 100, 2)
+    else:
+        winner = team2
+        win_prob = round(team2_prob / (team1_prob + team2_prob) * 100, 2)
     
     teams = list(encoder_team.classes_)
     venues = list(encoder_venue.classes_)
